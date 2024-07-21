@@ -30,8 +30,9 @@ fn test_luajit_macro() {
     expected.assert_eq(decls);
 
     let lua = unsafe { mlua::Lua::unsafe_new() };
-    lua.load(
-        r#"
+    let x: (String, i32) = lua
+        .load(
+            r#"
         local ffi = require "ffi"
 
         ffi.cdef [[
@@ -39,11 +40,18 @@ fn test_luajit_macro() {
         ]]
 
         local decls = ffi.string(ffi.C.exports_luajit_ffi_decls())
-        print(decls)
         ffi.cdef(decls)
+        print(decls)
         print(ffi.C.another_c_function(123))
+        return decls, ffi.C.another_c_function(123)
     "#,
-    )
-    .exec()
-    .unwrap();
+        )
+        .eval()
+        .unwrap();
+    expect![[r#"
+        (
+            "int32_t my_c_function(int32_t a, double b);\nint32_t another_c_function(int32_t x);",
+            246,
+        )"#]]
+    .assert_eq(&format!("{x:#?}"));
 }

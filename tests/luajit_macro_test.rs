@@ -1,7 +1,7 @@
 extern crate libc;
 
 use expect_test::expect;
-use pie_lua::luajit_module;
+use luajit_ffi_macro::luajit_module;
 use std::ffi::CStr;
 
 #[luajit_module]

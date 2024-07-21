@@ -117,6 +117,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "luajit-ffi-macro"
+version = "0.1.0"
+dependencies = [
+ "expect-test",
+ "libc",
+ "mlua",
+ "once_cell",
+ "proc-macro2",
+ "quote",
+ "syn 2.0.71",
+]
+
+[[package]]
 name = "luajit-src"
 version = "210.5.8+5790d25"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -188,19 +201,6 @@ name = "once_cell"
 version = "1.19.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3fdb12b2476b595f9358c5161aa467c2438859caa136dec86c26fdd2efe17b92"
-
-[[package]]
-name = "pie-lua"
-version = "0.1.0"
-dependencies = [
- "expect-test",
- "libc",
- "mlua",
- "once_cell",
- "proc-macro2",
- "quote",
- "syn 2.0.71",
-]
 
 [[package]]
 name = "pkg-config"
